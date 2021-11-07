@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -15,23 +16,25 @@ function Navbar() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       {matches ? (
-        <DrawerComponent/>
+        <DrawerComponent />
       ) : (
         <AppBar position="static" sx={{ background: grey[700] }}>
           <Toolbar>
-            <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-            >
-              <HomeIcon sx={{ color: yellow[400] }} />
-            </IconButton>
+            <Link to="/">
+              <IconButton
+                size="large"
+                edge="start"
+                color="inherit"
+                aria-label="menu"
+              >
+                <HomeIcon sx={{ color: yellow[400] }} />
+              </IconButton>
+            </Link>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               Multi
             </Typography>
-            <Button color="inherit">Pokémon</Button>
-            <Button color="inherit">Rick and Morty</Button>
+            <Button color="inherit" component={Link} to='/pokemons'>Pokémon</Button>
+            <Button color="inherit" component={Link} to='/rick-and-morty'>Rick and Morty</Button>
           </Toolbar>
         </AppBar>
       )}

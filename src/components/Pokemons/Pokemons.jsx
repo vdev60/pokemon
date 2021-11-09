@@ -2,10 +2,8 @@ import React, { Fragment } from "react";
 import PokemonCard from "./PokemonCard";
 import Grid from "@mui/material/Grid";
 import { useState, useEffect } from "react";
-import CircularProgress from "@mui/material/CircularProgress";
-import Box from "@mui/material/Box";
 import { yellow } from "@mui/material/colors";
-
+import Spinner from "../Spinner";
 function Pokemons() {
   const [dataPokemons, setDataPokemons] = useState({ pokemons: [] });
   const [loaded, setLoaded] = useState(true);
@@ -25,11 +23,7 @@ function Pokemons() {
   });
   return (
     <Fragment>
-      {loaded && (
-        <Box sx={{ display: "flex", justifyContent: "center" }}>
-          <CircularProgress sx={{ color: yellow[400] }} />
-        </Box>
-      )}
+      {loaded && <Spinner color={yellow[800]}/>}
       <Grid
         container
         spacing={{ xs: 2, md: 3 }}

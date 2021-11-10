@@ -1,5 +1,7 @@
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
+import { Button } from "@mui/material";
+
 
 export default function Spinner({color}) {
   return (

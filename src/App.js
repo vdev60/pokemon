@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "./components/Navbar";
 import Home from "./components/Pages/Home";
+import { Button } from "@mui/material";
 import { Container } from "@mui/material";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Pokemons from "./components/Pokemons/Pokemons";

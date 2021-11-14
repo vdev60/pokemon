@@ -11,13 +11,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-        if: ${{github.event_name == 'push'}}
       - uses: actions/setup-node@v2
         with:
           node-version: "14"
       - run: npm install
       - run: npm run lint
-        if: ${{github.event_name == 'pull_request'}}
+        if: ${{github.event_name == 'pull_request' && success()}}
       - uses: akhileshns/heroku-deploy@v3.12.12 
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}

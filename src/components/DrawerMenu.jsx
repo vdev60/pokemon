@@ -9,6 +9,8 @@ import {
   Button
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
+import MenuIcon from "@mui/icons-material/Menu";
+
 import { yellow, grey } from "@mui/material/colors";
 import { Link } from "react-router-dom";
 

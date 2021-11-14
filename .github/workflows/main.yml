@@ -10,13 +10,14 @@ jobs:
   React-Project:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Start ESLint for .js and .jsx files"
       - uses: actions/checkout@v2
+        if: ${{github.event_name == 'push'}}
       - uses: actions/setup-node@v2
         with:
           node-version: "14"
       - run: npm install
       - run: npm run lint
+        if: ${{github.event_name == 'pull_request'}}
       - uses: akhileshns/heroku-deploy@v3.12.12 
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}

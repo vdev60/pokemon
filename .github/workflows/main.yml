@@ -1,9 +1,5 @@
 name: GitHub Actions Demo
-on:
-  push:
-  pull_request:
-    branches:
-      - main
+on: [push, pull_request]
 jobs:
   React-Project:
     runs-on: ubuntu-latest

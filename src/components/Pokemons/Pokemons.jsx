@@ -1,25 +1,34 @@
-import React, { Fragment } from "react";
+import React, {Fragment } from "react";
 import PokemonCard from "./PokemonCard";
 import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
 import { useEffect } from "react";
 import { yellow } from "@mui/material/colors";
 import Spinner from "../Spinner";
-import { useSelector, useDispatch } from "react-redux";
-import { getPokemons } from "../../features/pokemons/pokemonsSlice";
-function Pokemons() {
-  const status = useSelector((state) => state.pokemons.status);
-  const pokemons = useSelector((state) => state.pokemons.list);
-  const dispatch = useDispatch();
+import { connect } from "react-redux";
+import { fetchedPokemons } from "../../features/actions";
+import { useSelector } from "react-redux";
+function Pokemons(props) {
+  const loading = useSelector(state => state.pokemons.loading)
   useEffect(() => {
-    dispatch(getPokemons());
-  }, [dispatch]);
+    props.pokemons();
+  }, []);
 
-  const listItems = pokemons.map((item, index) => {
+  const listItems = props.list.map((item, index) => {
     return <PokemonCard data={item} key={index} />;
   });
+
+  if (props.error) {
+    return (
+      <Typography variant="h4" color="error" sx={{ textAlign: "center" }}>
+        {props.error}
+      </Typography>
+    );
+  }
+
   return (
     <Fragment>
-      {status === "loading" && <Spinner color={yellow[800]} />}
+      {loading && <Spinner color={yellow[800]} />}
       <Grid
         container
         spacing={{ xs: 2, md: 3 }}
@@ -31,4 +40,17 @@ function Pokemons() {
   );
 }
 
-export default Pokemons;
+const mapStateToProps = (state) => {
+  return {
+    list: state.pokemons.list,
+    loading: state.pokemons.loading,
+    error: state.pokemons.error,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    pokemons: () => dispatch(fetchedPokemons()),
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Pokemons);

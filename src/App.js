@@ -5,8 +5,8 @@ import { Container } from "@mui/material";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Pokemons from "./components/Pokemons/Pokemons";
 import Ricks from "./components/Ricks/Ricks";
-import { ApolloClient, ApolloProvider,InMemoryCache} from "@apollo/client";
-
+import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+import RickPage from "./components/Ricks/RickPage";
 const client = new ApolloClient({
   uri: "https://rickandmortyapi.com/graphql",
   cache: new InMemoryCache(),
@@ -29,6 +29,7 @@ function App() {
               <Route path="/rick-and-morty">
                 <Ricks />
               </Route>
+              <Route exact path="/rick/:rickId" component={RickPage}/>
             </Switch>
           </Container>
         </React.StrictMode>
